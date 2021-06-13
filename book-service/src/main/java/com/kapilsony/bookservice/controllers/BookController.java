@@ -4,6 +4,7 @@ import com.kapilsony.bookservice.dto.BookRequest;
 import com.kapilsony.bookservice.dto.BookResponse;
 import com.kapilsony.bookservice.services.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,13 @@ import static org.springframework.http.ResponseEntity.status;
 public class BookController {
 
     private final BookService bookService;
+    @Value("${testprop}")
+    private String testprop;
+
+    @GetMapping("/test")
+    public String test(){
+        return testprop;
+    }
 
     @PostMapping
     public ResponseEntity<Void> createBook(@RequestBody BookRequest bookRequest) {
