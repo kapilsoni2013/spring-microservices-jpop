@@ -9,6 +9,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -21,12 +22,14 @@ import static org.springframework.http.ResponseEntity.status;
 public class BookController {
 
     private final BookService bookService;
+    private final RestTemplate restTemplate;
     @Value("${testprop}")
     private String testprop;
 
     @GetMapping("/test")
     public String test(){
-        return testprop;
+        String res = restTemplate.getForObject("http://user-service/users", String.class);
+        return res;
     }
 
     @PostMapping
