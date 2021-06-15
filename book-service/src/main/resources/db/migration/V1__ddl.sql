@@ -1,3 +1,4 @@
+
 CREATE TABLE `books` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `author` varchar(255) DEFAULT NULL,
