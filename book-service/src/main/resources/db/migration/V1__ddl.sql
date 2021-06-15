@@ -1,5 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS jpopdb;
-CREATE TABLE IF NOT EXISTS jpopdb.books (
+CREATE TABLE IF NOT EXISTS books (
   id bigint NOT NULL AUTO_INCREMENT,
   author varchar(255) DEFAULT NULL,
   category varchar(255) DEFAULT NULL,
