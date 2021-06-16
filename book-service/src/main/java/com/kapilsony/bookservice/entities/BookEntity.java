@@ -31,3 +31,4 @@ public class BookEntity {
     @Column(name = "updateTime",nullable = false)
     private Date updateTime;
 }
+
