@@ -13,6 +13,15 @@ import java.util.Date;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 public class LibraryEntity {
+
+    public LibraryEntity() {
+    }
+
+    public LibraryEntity(Long user_id, Long book_id) {
+        this.user_id = user_id;
+        this.book_id = book_id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
