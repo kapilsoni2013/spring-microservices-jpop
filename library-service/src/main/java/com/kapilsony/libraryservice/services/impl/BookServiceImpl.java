@@ -4,6 +4,7 @@ import com.kapilsony.libraryservice.dto.BookRequest;
 import com.kapilsony.libraryservice.dto.BookResponse;
 import com.kapilsony.libraryservice.services.BookRemoteService;
 import com.kapilsony.libraryservice.services.BookService;
+import com.kapilsony.libraryservice.services.LibraryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
 
     private final BookRemoteService bookRemoteService;
+    private final LibraryService libraryService;
     @Override
     public List<BookResponse> getAllBooks() {
         return bookRemoteService.getAllBooks();
@@ -34,6 +36,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public void deleteBookFromLibrary(Long book_id) {
         bookRemoteService.deleteBook(book_id);
+        libraryService.releaseAllUsersFromBook(book_id);
+
     }
 
     @Override
