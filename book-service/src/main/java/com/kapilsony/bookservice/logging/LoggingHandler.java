@@ -17,7 +17,7 @@ import java.util.Enumeration;
 @Slf4j
 public class LoggingHandler {
 
-    @Pointcut("within(@org.springframework.stereotype.Controller *)")
+    @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     public void controller() {
     }
 
@@ -42,22 +42,22 @@ public class LoggingHandler {
     @Before("controller() && allMethod() && args(..,request)")
     public void logBefore(JoinPoint joinPoint, HttpServletRequest request) {
 
-        log.info("Entering in Method :  " + joinPoint.getSignature().getName());
-        log.debug("Class Name :  " + joinPoint.getSignature().getDeclaringTypeName());
-        log.debug("Arguments :  " + Arrays.toString(joinPoint.getArgs()));
-        log.debug("Target class : " + joinPoint.getTarget().getClass().getName());
+        log.debug("AOP: Entering in Method :  " + joinPoint.getSignature().getName());
+        log.debug("AOP: Class Name :  " + joinPoint.getSignature().getDeclaringTypeName());
+        log.debug("AOP: Arguments :  " + Arrays.toString(joinPoint.getArgs()));
+        log.debug("AOP: Target class : " + joinPoint.getTarget().getClass().getName());
 
         if (null != request) {
-            log.debug("Start Header Section of request ");
-            log.debug("Method Type : " + request.getMethod());
+            log.debug("AOP: Start Header Section of request ");
+            log.debug("AOP: Method Type : " + request.getMethod());
             Enumeration<String> headerNames = request.getHeaderNames();
             while (headerNames.hasMoreElements()) {
                 String headerName = headerNames.nextElement();
                 String headerValue = request.getHeader(headerName);
-                log.debug("Header Name: " + headerName + " Header Value : " + headerValue);
+                log.debug("AOP: Header Name: " + headerName + " Header Value : " + headerValue);
             }
-            log.debug("Request Path info :" + request.getServletPath());
-            log.debug("End Header Section of request ");
+            log.debug("AOP: Request Path info :" + request.getServletPath());
+            log.debug("AOP: End Header Section of request ");
         }
     }
     //After -> All method within resource annotated with @Controller annotation
@@ -65,7 +65,7 @@ public class LoggingHandler {
     @AfterReturning(pointcut = "controller() && allMethod()", returning = "result")
     public void logAfter(JoinPoint joinPoint, Object result) {
         String returnValue = this.getValue(result);
-        log.debug("Method Return value : " + returnValue);
+        log.debug("AOP: Method Return value : " + returnValue);
     }
     //After -> Any method within resource annotated with @Controller annotation
     // throws an exception ...Log it
@@ -84,7 +84,7 @@ public class LoggingHandler {
             String methodName = joinPoint.getSignature().getName();
             Object result = joinPoint.proceed();
             long elapsedTime = System.currentTimeMillis() - start;
-            log.debug("Method " + className + "." + methodName + " ()" + " execution time : "
+            log.debug("AOP: Method Reponse Timing: " + className + "." + methodName + " ()" + " execution time : "
                     + elapsedTime + " ms");
 
             return result;

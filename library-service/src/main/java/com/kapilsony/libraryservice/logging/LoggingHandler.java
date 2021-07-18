@@ -1,37 +1,20 @@
-package com.kapilsony.userservice.logging;
-
-import java.util.Arrays;
-import java.util.Enumeration;
-
-import javax.servlet.http.HttpServletRequest;
+package com.kapilsony.libraryservice.logging;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.context.scope.refresh.RefreshScopeRefreshedEvent;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Enumeration;
+
 @Aspect
-@Configuration
+@Component
 @Slf4j
 public class LoggingHandler {
-
-    @EventListener
-    public void test(final RefreshScopeRefreshedEvent event){
-        System.out.println("RefreshScopeRefreshedEvent: "+event.toString());
-    }
 
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     public void controller() {
@@ -49,7 +32,7 @@ public class LoggingHandler {
     protected void loggingAllOperation() {
     }
 
-    @Pointcut("within(com.kapilsony.userservice..*)")
+    @Pointcut("within(com.kapilsony.libraryservice..*)")
     private void logAnyFunctionWithinResource() {
     }
 
@@ -100,7 +83,7 @@ public class LoggingHandler {
             String methodName = joinPoint.getSignature().getName();
             Object result = joinPoint.proceed();
             long elapsedTime = System.currentTimeMillis() - start;
-            log.debug("AOP: Method " + className + "." + methodName + " ()" + " execution time : "
+            log.debug("AOP: Method Reponse Timing: " + className + "." + methodName + " ()" + " execution time : "
                     + elapsedTime + " ms");
 
             return result;
