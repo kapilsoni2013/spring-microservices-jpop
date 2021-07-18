@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.status;
@@ -33,30 +35,30 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createBook(@RequestBody BookRequest bookRequest) {
+    public ResponseEntity<Void> createBook(@RequestBody BookRequest bookRequest, HttpServletRequest request) {
         bookService.save(bookRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateBook(@PathVariable Long id,@RequestBody BookRequest bookRequest) {
+    public ResponseEntity<Void> updateBook(@PathVariable Long id,@RequestBody BookRequest bookRequest, HttpServletRequest request) {
         bookService.update(id,bookRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<BookResponse>> getAllBooks() {
+    public ResponseEntity<List<BookResponse>> getAllBooks(HttpServletRequest request) {
         List<BookResponse> books = bookService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(books);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookResponse> getBook(@PathVariable Long id) {
+    public ResponseEntity<BookResponse> getBook(@PathVariable Long id, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(bookService.findById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id){
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id, HttpServletRequest request){
         bookService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

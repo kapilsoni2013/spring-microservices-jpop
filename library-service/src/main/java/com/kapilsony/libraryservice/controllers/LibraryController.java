@@ -23,14 +23,14 @@ public class LibraryController {
 
     @PostMapping("/users/{user_id}/books/{book_id}")
     public ResponseEntity<Void> issueBookToUser(@PathVariable("user_id") Long user_id,
-                                           @PathVariable("book_id") Long book_id) {
+                                           @PathVariable("book_id") Long book_id, HttpServletRequest request) {
         libraryService.issueBookToUser(user_id, book_id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/users/{user_id}/books/{book_id}")
     public ResponseEntity<Void> releaseBookFromUser(@PathVariable("user_id") Long user_id,
-                                           @PathVariable("book_id") Long book_id) {
+                                           @PathVariable("book_id") Long book_id, HttpServletRequest request) {
         libraryService.releaseBookFromUser(user_id, book_id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

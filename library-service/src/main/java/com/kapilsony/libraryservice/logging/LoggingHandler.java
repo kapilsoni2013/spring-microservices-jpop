@@ -1,11 +1,10 @@
-package com.kapilsony.bookservice.logging;
+package com.kapilsony.libraryservice.logging;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +42,7 @@ public class LoggingHandler {
     protected void loggingAllOperation() {
     }
 
-    @Pointcut("within(com.kapilsony.bookservice..*)")
+    @Pointcut("within(com.kapilsony.libraryservice..*)")
     private void logAnyFunctionWithinResource() {
     }
 

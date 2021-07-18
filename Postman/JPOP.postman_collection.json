@@ -1,0 +1,894 @@
+{
+	"info": {
+		"_postman_id": "2301ba7b-71e7-4756-9bf7-0159cdcddb5e",
+		"name": "JPOP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Service",
+			"item": [
+				{
+					"name": "Add New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"kapil\",\r\n    \"email\":\"kapil@test.com\",\r\n    \"age\":27,\r\n    \"firstName\":\"Kapil\",\r\n    \"lastName\" : \"Soni\",\r\n    \"address\":\"Haryana\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{USER_PORT}}/users",
+							"host": [
+								"localhost"
+							],
+							"port": "{{USER_PORT}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":1,\r\n    \"username\":\"kapil\",\r\n    \"email\":\"kapil@test.com\",\r\n    \"age\":27,\r\n    \"firstName\":\"Kapil\",\r\n    \"lastName\" : \"Soni\",\r\n    \"address\":\"Haryana\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{USER_PORT}}/users",
+							"host": [
+								"localhost"
+							],
+							"port": "{{USER_PORT}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{USER_PORT}}/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "{{USER_PORT}}",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{USER_PORT}}/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "{{USER_PORT}}",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{USER_PORT}}/users",
+							"host": [
+								"localhost"
+							],
+							"port": "{{USER_PORT}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book Service",
+			"item": [
+				{
+					"name": "Add New Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"C++1\",\r\n    \"author\":\"Thomas\",\r\n    \"price\":99.55,\r\n    \"category\":\"PROGRAMMING\",\r\n    \"description\" : \"Java Book for Begineers\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{BOOK_PORT}}/books",
+							"host": [
+								"localhost"
+							],
+							"port": "{{BOOK_PORT}}",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"JAVA\",\r\n    \"author\":\"Thomas\",\r\n    \"price\":30.55,\r\n    \"category\":\"PROGRAMMING\",\r\n    \"description\" : \"Java Book for Begineers\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{BOOK_PORT}}/books/22",
+							"host": [
+								"localhost"
+							],
+							"port": "{{BOOK_PORT}}",
+							"path": [
+								"books",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{BOOK_PORT}}/books/322",
+							"host": [
+								"localhost"
+							],
+							"port": "{{BOOK_PORT}}",
+							"path": [
+								"books",
+								"322"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{BOOK_PORT}}/books/211",
+							"host": [
+								"localhost"
+							],
+							"port": "{{BOOK_PORT}}",
+							"path": [
+								"books",
+								"211"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{BOOK_PORT}}/books",
+							"host": [
+								"localhost"
+							],
+							"port": "{{BOOK_PORT}}",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Library Service",
+			"item": [
+				{
+					"name": "BOOKS",
+					"item": [
+						{
+							"name": "BOOK Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/books",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/books/6",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"books",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK Add",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"WELCOME\",\r\n    \"author\":\"Thomas\",\r\n    \"price\":99.55,\r\n    \"category\":\"PROGRAMMING\",\r\n    \"description\" : \"Java Book for Begineers\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/books",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"JAVA\",\r\n    \"author\":\"Thomas\",\r\n    \"price\":30.55,\r\n    \"category\":\"PROGRAMMING\",\r\n    \"description\" : \"Java Book for Begineers\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/books/1",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"books",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/books/2",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"books",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "USER",
+					"item": [
+						{
+							"name": "USER Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/users",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/users/7",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"users",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER Add",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"Ajay\",\r\n    \"email\":\"Ajay@test.com\",\r\n    \"age\":27,\r\n    \"firstName\":\"Ajay\",\r\n    \"lastName\" : \"Ajay\",\r\n    \"address\":\"Haryana\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/users",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"aa\",\r\n    \"email\":\"aaa@test.com\",\r\n    \"age\":27,\r\n    \"firstName\":\"Kapil\",\r\n    \"lastName\" : \"Soni\",\r\n    \"address\":\"Haryana\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/users/6",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"users",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{LIBRARY_PORT}}/library/users/7",
+									"host": [
+										"localhost"
+									],
+									"port": "{{LIBRARY_PORT}}",
+									"path": [
+										"library",
+										"users",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ISSUE BOOK",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{LIBRARY_PORT}}/library/users/7/books/8",
+							"host": [
+								"localhost"
+							],
+							"port": "{{LIBRARY_PORT}}",
+							"path": [
+								"library",
+								"users",
+								"7",
+								"books",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RELEASE BOOK",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{LIBRARY_PORT}}/library/users/1222/books/222",
+							"host": [
+								"localhost"
+							],
+							"port": "{{LIBRARY_PORT}}",
+							"path": [
+								"library",
+								"users",
+								"1222",
+								"books",
+								"222"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gateway API",
+			"item": [
+				{
+					"name": "BOOKS",
+					"item": [
+						{
+							"name": "BOOK Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/books",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/books/6",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"books",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK Add",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"C++1\",\r\n    \"author\":\"Thomas\",\r\n    \"price\":99.55,\r\n    \"category\":\"PROGRAMMING\",\r\n    \"description\" : \"Java Book for Begineers\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/books",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"books"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"JAVA\",\r\n    \"author\":\"Thomas\",\r\n    \"price\":30.55,\r\n    \"category\":\"PROGRAMMING\",\r\n    \"description\" : \"Java Book for Begineers\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/books/1",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"books",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BOOK Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/books/11",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"books",
+										"11"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "USER",
+					"item": [
+						{
+							"name": "USER Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/users",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER findById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/users/7",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"users",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER Add",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"Ajay\",\r\n    \"email\":\"Ajay@test.com\",\r\n    \"age\":27,\r\n    \"firstName\":\"Ajay\",\r\n    \"lastName\" : \"Ajay\",\r\n    \"address\":\"Haryana\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/users",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"aa\",\r\n    \"email\":\"aaa@test.com\",\r\n    \"age\":27,\r\n    \"firstName\":\"Kapil\",\r\n    \"lastName\" : \"Soni\",\r\n    \"address\":\"Haryana\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/users/6",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"users",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "USER Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/users/7",
+									"host": [
+										"localhost"
+									],
+									"port": "{{GATEWAY_PORT}}",
+									"path": [
+										"library-service",
+										"library",
+										"users",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ISSUE BOOK",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/users/1/books/2",
+							"host": [
+								"localhost"
+							],
+							"port": "{{GATEWAY_PORT}}",
+							"path": [
+								"library-service",
+								"library",
+								"users",
+								"1",
+								"books",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RELEASE BOOK",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:{{GATEWAY_PORT}}/library-service/library/users/1/books/2",
+							"host": [
+								"localhost"
+							],
+							"port": "{{GATEWAY_PORT}}",
+							"path": [
+								"library-service",
+								"library",
+								"users",
+								"1",
+								"books",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "USER_PORT",
+			"value": "8011"
+		},
+		{
+			"key": "BOOK_PORT",
+			"value": "8021"
+		},
+		{
+			"key": "LIBRARY_PORT",
+			"value": "8031"
+		},
+		{
+			"key": "GATEWAY_PORT",
+			"value": "8080"
+		}
+	]
+}
