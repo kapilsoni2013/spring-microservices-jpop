@@ -1,7 +1,9 @@
 package com.kapilsony.libraryservice.services;
 
+import com.kapilsony.libraryservice.configs.LoadBalancerConfiguration;
 import com.kapilsony.libraryservice.dto.UserRequest;
 import com.kapilsony.libraryservice.dto.UserResponse;
+import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @FeignClient(name = "USER-SERVICE")
+@LoadBalancerClient(name = "USER-SERVICE",
+        configuration= LoadBalancerConfiguration.class)
 @RequestMapping("/users")
 public interface UserRemoteService {
     @GetMapping

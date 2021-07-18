@@ -1,8 +1,11 @@
 package com.kapilsony.bookservice.dto;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BookResponse {
     private Long bookId;
 
