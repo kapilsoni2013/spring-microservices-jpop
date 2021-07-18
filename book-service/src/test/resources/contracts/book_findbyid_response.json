@@ -1,0 +1,8 @@
+{
+  "bookId": 3,
+  "name": "Java",
+  "price": 99.55,
+  "author": "Thomas",
+  "category": "PROGRAMMING",
+  "description": "Java Book for Begineers"
+}
