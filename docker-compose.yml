@@ -1,0 +1,150 @@
+version: '3'
+services:
+  MYSQL-SERVER:
+    image: mysql:8.0.20
+    container_name: MYSQL-SERVER
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    volumes:
+    - ./docker:/docker-entrypoint-initdb.d
+    ports:
+    - 3307:3306
+    networks:
+    - spring-cloud-network
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp --default-authentication-plugin=mysql_native_password
+  config-server:
+    container_name: config-server
+    build:
+      context: config-server
+      dockerfile: Dockerfile
+    image: jpop/config-server-service:latest
+    depends_on:
+    - MYSQL-SERVER
+    environment:
+    - spring.profiles.active=native
+    - spring.cloud.config.server.native.search-locations=config-store
+    ports:
+    - 8888:8888
+    networks:
+    - spring-cloud-network
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: eureka-server
+      dockerfile: Dockerfile
+    image: jpop/eureka-server-service:latest
+    environment:
+    - spring.cloud.config.uri=http://config-server:8888
+    depends_on:
+    - config-server
+    restart: always
+    command: ["sh -c ./wait-for", "config-server"]
+    ports:
+    - 8761:8761
+    networks:
+    - spring-cloud-network
+  user-service:
+    container_name: user-service
+    build:
+      context: user-service
+      dockerfile: Dockerfile
+    image: jpop/user-service:latest
+    environment:
+    - db.host=MYSQL-SERVER
+    - db.port=3306
+    - db.name=jpop_user_schema
+    - db.username=root
+    - db.password=root
+    - EUREKA_HOST_URL=http://eureka-server:8761/eureka
+    - spring.cloud.config.uri=http://config-server:8888
+    depends_on:
+    - config-server
+    - eureka-server
+    - MYSQL-SERVER
+    restart: on-failure
+    ports:
+    - 8011:8011
+    networks:
+    - spring-cloud-network
+  book-service:
+    container_name: book-service
+    build:
+      context: book-service
+      dockerfile: Dockerfile
+    image: jpop/book-service:latest
+    environment:
+    - db.host=MYSQL-SERVER
+    - db.port=3306
+    - db.name=jpop_book_schema
+    - db.username=root
+    - db.password=root
+    - EUREKA_HOST_URL=http://eureka-server:8761/eureka
+    - spring.cloud.config.uri=http://config-server:8888
+    depends_on:
+      - config-server
+      - eureka-server
+      - MYSQL-SERVER
+      - user-service
+    restart: on-failure
+    ports:
+      - 8021:8021
+    networks:
+      - spring-cloud-network
+  library-service:
+    container_name: library-service
+    build:
+      context: library-service
+      dockerfile: Dockerfile
+    image: jpop/library-service:latest
+    environment:
+      - db.host=MYSQL-SERVER
+      - db.port=3306
+      - db.name=jpop_library_schema
+      - db.username=root
+      - db.password=root
+      - EUREKA_HOST_URL=http://eureka-server:8761/eureka
+      - spring.cloud.config.uri=http://config-server:8888
+    depends_on:
+      - config-server
+      - eureka-server
+      - MYSQL-SERVER
+      - user-service
+      - book-service
+    restart: always
+    ports:
+      - 8031:8031
+    networks:
+      - spring-cloud-network
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: api-gateway-service
+      dockerfile: Dockerfile
+    image: jpop/gateway-service:latest
+    environment:
+      - db.host=MYSQL-SERVER
+      - db.port=3306
+      - db.name=jpop_user_schema
+      - db.username=root
+      - db.password=root
+      - EUREKA_HOST_URL=http://eureka-server:8761/eureka
+      - spring.cloud.config.uri=http://config-server:8888
+    depends_on:
+      - config-server
+      - eureka-server
+      - MYSQL-SERVER
+      - user-service
+      - book-service
+      - library-service
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - spring-cloud-network
+
+volumes:
+  database:
+    driver: local
+networks:
+  spring-cloud-network:
+    driver: bridge

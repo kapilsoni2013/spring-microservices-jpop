@@ -1,4 +1,5 @@
 FROM openjdk:8
-ADD ./target/userservice-0.0.1-SNAPSHOT.jar /usr/src/userservice-0.0.1-SNAPSHOT.jar
-WORKDIR usr/src
+EXPOSE 8011
+WORKDIR usr/jpop
+ADD ./user-service/target/userservice-0.0.1-SNAPSHOT.jar userservice-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["java","-jar", "userservice-0.0.1-SNAPSHOT.jar"]

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "USER-SERVICE")
-@LoadBalancerClient(name = "USER-SERVICE",
+@FeignClient(name = "user-service")
+@LoadBalancerClient(name = "user-service",
         configuration= LoadBalancerConfiguration.class)
 @RequestMapping("/users")
 public interface UserRemoteService {

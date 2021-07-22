@@ -12,7 +12,7 @@
 //    public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
 //        return builder.routes()
 //                .route(r -> r.path("/library-service/**")
-//                        .uri("lb://LIBRARY-SERVICE"))
+//                        .uri("lb://library-service"))
 //
 //                .route(r -> r.path("/consumer/**")
 //                        .uri("lb://SECOND-SERVICE"))

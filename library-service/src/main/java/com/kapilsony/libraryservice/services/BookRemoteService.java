@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "BOOK-SERVICE")
-@LoadBalancerClient(name = "BOOK-SERVICE",
+@FeignClient(name = "book-service")
+@LoadBalancerClient(name = "book-service",
         configuration= LoadBalancerConfiguration.class)
 @RequestMapping("/books")
 public interface BookRemoteService {
