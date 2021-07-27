@@ -2,7 +2,11 @@ server:
   port: 8080
 spring:
   application:
-    name: GATEWAY-SERVICE
+    name: gateway-service
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111
   cloud:
     config:
       label: session2
@@ -29,6 +33,10 @@ management:
         include: '*'
   security:
     enabled: false
-#logging:
-#  level:
-#    root: debug
+logging:
+  level:
+    de:
+      codecentric:
+        boot:
+          admin:
+            client: DEBUG
