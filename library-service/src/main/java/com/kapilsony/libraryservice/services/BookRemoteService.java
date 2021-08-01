@@ -7,6 +7,8 @@ import com.kapilsony.libraryservice.dto.UserRequest;
 import com.kapilsony.libraryservice.dto.UserResponse;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
+import org.springframework.cloud.sleuth.annotation.SpanTag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +25,13 @@ public interface BookRemoteService {
     @PutMapping("/{id}")
     public void updateBook(@PathVariable("id") Long id,@RequestBody BookRequest bookRequest);
 
+    @NewSpan("Calling getAllBooks")
     @GetMapping
     public List<BookResponse> getAllBooks();
 
+    @NewSpan("Calling getBook")
     @GetMapping("/{id}")
-    public BookResponse getBook(@PathVariable("id") Long id);
+    public BookResponse getBook(@SpanTag("book_id") @PathVariable("id") Long id);
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable("id") Long id);

@@ -9,6 +9,8 @@ import com.kapilsony.libraryservice.services.BookService;
 import com.kapilsony.libraryservice.services.LibraryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
+import org.springframework.cloud.sleuth.annotation.SpanTag;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +26,12 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookResponse> getAllBooks() {
         log.info("Original span going on");
-        Span newSpan = tracer.nextSpan().name("new sleuth span TEST").start();
+        Span newSpan = tracer.nextSpan()
+                .name("new sleuth span TEST")
+                .tag("Key1","Val1")
+                .annotate("Annotate method")
+                .remoteServiceName("Book Remote Service")
+                .start();
         try(Tracer.SpanInScope span = tracer.withSpanInScope(newSpan.start())){
             log.info("This work is being done in the new span");
         }finally {
