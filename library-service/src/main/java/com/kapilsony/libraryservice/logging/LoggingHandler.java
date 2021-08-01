@@ -51,24 +51,24 @@ public class LoggingHandler {
     @Before("controller() && allMethod() && args(..,request)")
     public void logBefore(JoinPoint joinPoint, HttpServletRequest request) {
 
-        log.debug("AOP: Entering in Method :  " + joinPoint.getSignature().getName());
-        log.debug("AOP: Class Name :  " + joinPoint.getSignature().getDeclaringTypeName());
-        log.debug("AOP: Arguments :  " + Arrays.toString(joinPoint.getArgs()));
-        log.debug("AOP: Target class : " + joinPoint.getTarget().getClass().getName());
+        log.info("AOP: Entering in Method :  " + joinPoint.getSignature().getName());
+        log.info("AOP: Class Name :  " + joinPoint.getSignature().getDeclaringTypeName());
+        log.info("AOP: Arguments :  " + Arrays.toString(joinPoint.getArgs()));
+        log.info("AOP: Target class : " + joinPoint.getTarget().getClass().getName());
 
         if (null != request) {
-            log.debug("AOP: Start Header Section of request ");
-            log.debug("AOP: Method Type : " + request.getMethod());
+            log.info("AOP: Start Header Section of request ");
+            log.info("AOP: Method Type : " + request.getMethod());
             Enumeration<String> headerNames = request.getHeaderNames();
             while (headerNames.hasMoreElements()) {
                 String headerName = headerNames.nextElement();
                 if(!ignoredHeader.contains(headerName.toLowerCase())) {
                     String headerValue = request.getHeader(headerName);
-                    log.debug("AOP: Header Name: " + headerName + ", Header Value : " + headerValue);
+                    log.info("AOP: Header Name: " + headerName + ", Header Value : " + headerValue);
                 }
             }
-            log.debug("AOP: Request Path info :" + request.getServletPath());
-            log.debug("AOP: End Header Section of request ");
+            log.info("AOP: Request Path info :" + request.getServletPath());
+            log.info("AOP: End Header Section of request ");
         }
     }
     //After -> All method within resource annotated with @Controller annotation
@@ -76,14 +76,14 @@ public class LoggingHandler {
     @AfterReturning(pointcut = "controller() && allMethod()", returning = "result")
     public void logAfter(JoinPoint joinPoint, Object result) {
         String returnValue = this.getValue(result);
-        log.debug("AOP: Method Return value : " + returnValue);
+        log.info("AOP: Method Return value : " + returnValue);
     }
     //After -> Any method within resource annotated with @Controller annotation
     // throws an exception ...Log it
     @AfterThrowing(pointcut = "controller() && allMethod()", throwing = "exception")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable exception) {
-        log.error("An exception has been thrown in " + joinPoint.getSignature().getName() + " ()");
-        log.error("Cause : " + exception.getMessage());
+        log.error("AOP: An exception has been thrown in " + joinPoint.getSignature().getName() + " ()");
+        log.error("AOP: Cause : " + exception.getMessage());
     }
     //Around -> Any method within resource annotated with @Controller annotation
     @Around("controller() && allMethod()")
@@ -95,12 +95,12 @@ public class LoggingHandler {
             String methodName = joinPoint.getSignature().getName();
             Object result = joinPoint.proceed();
             long elapsedTime = System.currentTimeMillis() - start;
-            log.debug("AOP: Method Reponse Timing: " + className + "." + methodName + " ()" + " execution time : "
+            log.info("AOP: Method Reponse Timing: " + className + "." + methodName + " ()" + " execution time : "
                     + elapsedTime + " ms");
 
             return result;
         } catch (IllegalArgumentException e) {
-            log.error("Illegal argument " + Arrays.toString(joinPoint.getArgs()) + " in "
+            log.error("AOP: Illegal argument " + Arrays.toString(joinPoint.getArgs()) + " in "
                     + joinPoint.getSignature().getName() + "()");
             throw e;
         }

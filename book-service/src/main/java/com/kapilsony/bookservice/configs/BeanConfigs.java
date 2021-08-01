@@ -1,5 +1,6 @@
 package com.kapilsony.bookservice.configs;
 
+import brave.sampler.Sampler;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -33,5 +34,10 @@ public class BeanConfigs {
                 .externalDocs(new ExternalDocumentation()
                         .description("BookService Wiki Documentation")
                         .url("https://BookService-external-service/docs"));
+    }
+
+    @Bean
+    public Sampler defaultSampler() {
+        return Sampler.ALWAYS_SAMPLE;
     }
 }

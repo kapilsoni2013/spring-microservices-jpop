@@ -1,0 +1,43 @@
+version: '3'
+services:
+  zipkin-mysql:
+    image: openzipkin/zipkin-mysql
+    container_name: zipkin-mysql
+    ports:
+    - 3308:3306
+    restart: unless-stopped
+    volumes:
+    - database:/mysql/data
+    
+  zipkin-dependencies:
+    image: openzipkin/zipkin-dependencies
+    container_name: zipkin-dependencies
+    entrypoint: crond -f
+    environment:
+    - STORAGE_TYPE=mysql
+    - MYSQL_HOST=zipkin-mysql
+    - MYSQL_USER=zipkin
+    - MYSQL_PASS=zipkin
+    depends_on:
+    - zipkin-mysql
+    restart: unless-stopped
+    
+  zipkin-server:
+    image: openzipkin/zipkin
+    container_name: zipkin-server
+    ports:
+    - 9411:9411
+    environment:
+    - STORAGE_TYPE=mysql
+    - MYSQL_HOST=zipkin-mysql
+    - MYSQL_USER=zipkin
+    - MYSQL_PASS=zipkin
+    depends_on:
+    - zipkin-mysql
+    - zipkin-dependencies
+    restart: unless-stopped
+    
+volumes:
+  database:
+    driver: local
+    
