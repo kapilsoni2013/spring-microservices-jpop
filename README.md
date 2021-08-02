@@ -1,5 +1,11 @@
 # spring-microservices-jpop
 
+####vm max issue solution
+    for windows users, using wsl subsystem
+    open powershell run
+    wsl -d docker-desktop
+    then
+    sysctl -w vm.max_map_count=262144
 #DockerFile build Commands
 docker build -f config-server/Dockerfile -t jpop/config-server-service:0.0.1-SNAPSHOT -t jpop/config-server-service:latest .
 docker build -f eureka-server/Dockerfile -t jpop/eureka-server-service:0.0.1-SNAPSHOT -t jpop/eureka-server-service:latest .

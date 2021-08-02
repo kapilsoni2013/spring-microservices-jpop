@@ -35,3 +35,4 @@ build/
 ### VS Code ###
 .vscode/
 JPOP-Loggings
+docker/volumes

@@ -1,0 +1,60 @@
+version: "3"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch01
+      - cluster.name=es-docker-cluster
+      - cluster.initial_master_nodes=elasticsearch01
+      - bootstrap.memory_lock=true
+      - ELASTIC_USERNAME=root
+      - ELASTIC_PASSWORD=root
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./docker/volumes/elasticsearch/data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.13.4
+    container_name: logstash
+    volumes:
+      - ./docker/logstash-configs/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./docker/logstash-configs/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./JPOP-Loggings:/usr/share/logs
+    ports:
+      - 9600:9600
+    environment:
+      - ES_JAVA_OPTS=-Xmx256m -Xmx256m
+      - xpack.monitoring.elasticsearch.url=http://elasticsearch:9200
+      - xpack.monitoring.elasticsearch.username=root
+      - xpack.monitoring.elasticsearch.password=root
+      - ELASTIC_USER=root
+      - ELASTIC_PASSWORD=root
+    depends_on: [ elasticsearch ]
+    networks:
+      - elastic
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.13.4
+    container_name: kibana
+    environment:
+      - SERVER_NAME=kibana
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=root
+      - ELASTICSEARCH_PASSWORD=root
+    ports:
+      - 5601:5601
+    depends_on: [elasticsearch]
+    networks:
+      - elastic
+
+networks:
+  elastic:
+    driver: bridge
