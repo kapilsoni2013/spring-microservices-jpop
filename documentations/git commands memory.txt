@@ -1,0 +1,31 @@
+git restore/checkout :- to remove changes from a particular file
+git clean -xdf :- to remove newly created files, those don't have any commit hash
+git reset <fileName> || git reset . :- Uncommit particular file or all files
+git commit --amend -m "a new changed amended msg"  :- TO append new changes in last commit with new msg.(will remove last commit along with sha hash and override new changes and msg)
+git reset HEAD:- TO revert back to nTH commit, and unstash all the files, check below example:
+	HEAD : current commit 
+	HEAD^: revert to 1 commit back
+	HEAD^^: revert to 2 commit back
+	HEAD~N : revert to nTH commit back.eg HEAD^^==HEAD~2 OR HEAD^^==HEAD~3
+
+git reset -- hard :- Rever back to last commit. It will destroy all the non-committed modifications 
+git reset --hard HEAD^ : revert back to nTH commit. Warning:- All data lost of less than nTH commits and even no unstashed data.
+
+git reset --soft HEAD~N:- Rever back to last commit. will not destroy data just stagged the data till nTH commit.
+git reset --mixed HEAD~N:- Rever back to last commit. will not destroy data just unstagged the data till nTH commit.
+
+git revert sha1 : - to revert remote to prevoius commit sha1 state. History will be maintained as like new commit, but data will be revert.
+git rebase feature:- rebase
+
+git cherry-pick <commit id/sha1>  :- pick and merge specific commitId/sha1 from any other branch into current branch. IF we accidently added some new commit in wrong other branch.
+
+git stash save "description" :- stash changes
+git stash list:-  list of a  stash ; output:- stash{0}: On master: description, use "git stash apply stash{0}" := to apply partiular stash
+git stash pop:- undo stash and remove from stash
+git stash apply:- undo stash and keep in stash
+git stash drop:- remove from stash
+
+git fetch:- sync remote server to local 
+
+
+
