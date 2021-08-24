@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <h3>User List</h3>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary float-end" routerLink="addUser">Add User</button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">userId</th>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">UserName</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Address</th>
+          <th scope="col">Update User</th>
+          <th scope="col">Delete User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <th scope="row">{{user.userId}}</th>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.age}}</td>
+          <td>{{user.address}}</td>
+          <td><button type="button" class="btn btn-outline-primary" routerLink="viewUser/{{user.userId}}">View</button></td>
+          <td><button type="button" class="btn btn-outline-primary" routerLink="editUser/{{user.userId}}">Update</button></td>
+          <td><button type="button" class="btn btn-outline-danger" (click)="deleteUser(user.userId)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<router-outlet></router-outlet>
