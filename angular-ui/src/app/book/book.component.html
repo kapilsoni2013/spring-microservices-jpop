@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <h3>User List</h3>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary float-end" routerLink="addBook">Add Book</button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">bookId</th>
+          <th scope="col">name</th>
+          <th scope="col">price</th>
+          <th scope="col">author</th>
+          <th scope="col">category</th>
+          <th scope="col">description</th>
+          <th scope="col">Update Book</th>
+          <th scope="col">Delete Book</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books; let i = index">
+          <th scope="row">{{book.bookId}}</th>
+          <td>{{book.name}}</td>
+          <td>{{book.price}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.category}}</td>
+          <td>{{book.description}}</td>
+          <td><button type="button" class="btn btn-outline-primary" routerLink="viewBook/{{book.bookId}}">View</button></td>
+          <td><button type="button" class="btn btn-outline-primary" routerLink="editBook/{{book.bookId}}">Update</button></td>
+          <td><button type="button" class="btn btn-outline-danger" (click)="deleteBook(book.bookId)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<router-outlet></router-outlet>

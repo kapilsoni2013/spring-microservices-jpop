@@ -1,0 +1,78 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <h3>User Info</h3>
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-primary float-end" routerLink="../../">Back</button>
+    </div>
+  </div>
+  <div class="table-responsive" *ngIf="userData">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Label</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">UserId</th>
+          <td>{{userData.userId}}</td>
+        </tr>
+        <tr>
+          <th scope="row">FirstName</th>
+          <td>{{userData.firstName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">LastName</th>
+          <td>{{userData.firstName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">UserName</th>
+          <td>{{userData.firstName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Email</th>
+          <td>{{userData.firstName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Age</th>
+          <td>{{userData.firstName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Address</th>
+          <td>{{userData.firstName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Books</th>
+          <td>
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">bookId</th>
+                  <th scope="col">name</th>
+                  <th scope="col">price</th>
+                  <th scope="col">author</th>
+                  <th scope="col">category</th>
+                  <th scope="col">description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of userData.books">
+                  <th scope="row">{{item.bookId}}</th>
+                  <td>{{item.name}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.author}}</td>
+                  <td>{{item.category}}</td>
+                  <td>{{item.description}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<router-outlet></router-outlet>
